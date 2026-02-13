@@ -4,15 +4,14 @@ from dotenv import load_dotenv
 import cloudinary
 from urllib.parse import urlparse, parse_qsl
 
-# Load .env file for environment variables
+# Load .env
 load_dotenv()
 
-# BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security settings
 SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = True  # You can switch this to `False` in production
+# DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = True
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 # Installed apps
@@ -23,16 +22,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop',  # Your app
-    'cloudinary',  # Cloudinary app
-    'cloudinary_storage',  # Cloudinary storage app
+    'shop',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
-# Templates configuration
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Make sure templates are in the correct folder
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -45,21 +43,20 @@ TEMPLATES = [
     },
 ]
 
-# Middleware settings
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',  # Required for sessions
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Inserted here
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Required for auth
-    'django.contrib.messages.middleware.MessageMiddleware',  # Required for message handling
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # Inserted here
+    'django.contrib.messages.middleware.MessageMiddleware',  # Inserted here
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# URL configuration
-ROOT_URLCONF = 'config.urls'  # Make sure this points to your URLs file
+ROOT_URLCONF = 'config.urls'
 
-# Database configuration (PostgreSQL with the database URL)
+# Replace the DATABASES section of your settings.py with this
 tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
 DATABASES = {
@@ -74,21 +71,20 @@ DATABASES = {
     }
 }
 
-# Static and media files
+# Static & media
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where static files will be collected
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Your custom static files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'  # Where media files will be uploaded
+MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# Cloudinary settings
+# Cloudinary
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv("CLOUDINARY_CLOUD_NAME"),
     'API_KEY': os.getenv("CLOUDINARY_API_KEY"),
     'API_SECRET': os.getenv("CLOUDINARY_API_SECRET"),
 }
-
 cloudinary.config(
     cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
     api_key=CLOUDINARY_STORAGE['API_KEY'],
@@ -96,7 +92,7 @@ cloudinary.config(
     secure=True
 )
 
-# Email settings (using Gmail SMTP)
+# Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -105,7 +101,7 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# SSLCommerz configuration
+# SSLCommerz
 SSLCOMMERZ_STORE_ID = os.getenv("SSLCOMMERZ_STORE_ID")
 SSLCOMMERZ_STORE_PASSWORD = os.getenv("SSLCOMMERZ_STORE_PASSWORD")
 SSLCOMMERZ_CURRENCY = os.getenv("SSLCOMMERZ_CURRENCY")

@@ -14,13 +14,11 @@ class Brand(models.Model):
 
 # ---------------- Category ----------------
 class Category(models.Model):
-    categoryName = models.CharField(max_length=255)
-    categoryImg = CloudinaryField('image')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
+    name = models.CharField(max_length=255)
+    categoryImg = CloudinaryField('image', null=True, blank=True)  # Use CloudinaryField for image storage
+    
     def __str__(self):
-        return self.categoryName
+        return self.name
 
 # ---------------- Product ----------------
 class Product(models.Model):

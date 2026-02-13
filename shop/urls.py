@@ -23,4 +23,13 @@ urlpatterns = [
 
     # SSLCommerz payment page
     path('ssl-payment/<int:invoice_id>/', views.ssl_payment, name='ssl_payment'),
+
+    # Categories Page (Listing all categories)
+    path('categories/', views.categories_view, name='categories'),
+
+    # Contact page
+    path('contact/', views.contact_view, name='contact'),
+
+    # Search page
+    path('search/', views.search_view, name='search'),
 ]
