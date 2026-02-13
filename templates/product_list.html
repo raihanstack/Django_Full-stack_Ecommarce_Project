@@ -1,0 +1,13 @@
+{% extends 'layout/Layout.html' %}
+
+
+{% block content %}
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            {% include "component/product/ProductDetails.html" %}
+            {% include "component/product/ProductSpecificationsList.html" %}
+            {% include "component/product/CustomerReviewsList.html" %}
+            {% include "component/product/RelatedProductsList.html" %}
+      </main>
+     {% include "component/common/OfferBanner.html" %}
+     {% include "component/common/Newsletter.html" %}
+{% endblock %}

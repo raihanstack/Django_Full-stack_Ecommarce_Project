@@ -1,0 +1,50 @@
+<!-- RIGHT SIDE: ORDER SUMMARY SIDEBAR -->
+<div class="lg:col-span-1">
+  <div class="bg-white border border-gray-200 rounded-lg p-6 sticky top-24 shadow-sm">
+
+    <h2 class="text-xl font-semibold text-zinc-900 mb-6">Order Summary</h2>
+
+    <!-- Summary Details -->
+    <div class="space-y-4 mb-6">
+      <div class="flex justify-between text-sm text-zinc-600">
+        <span>Subtotal</span>
+        <span class="font-medium text-zinc-900">৳{{ subtotal|floatformat:2 }}</span>
+      </div>
+      <div class="flex justify-between text-sm text-zinc-600">
+        <span>Shipping</span>
+        <span class="font-medium text-zinc-900">৳{{ shipping|floatformat:2 }}</span>
+      </div>
+      <div class="flex justify-between text-sm text-zinc-600">
+        <span>Tax</span>
+        <span class="font-medium text-zinc-900">৳{{ tax|floatformat:2 }}</span>
+      </div>
+      <div class="border-t border-gray-200 pt-4">
+        <div class="flex justify-between items-center">
+          <span class="text-base font-semibold text-zinc-900">Total</span>
+          <span class="text-2xl font-bold text-zinc-900">৳{{ total|floatformat:2 }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direct SSLCommerz Payment -->
+    <form method="POST" action="{% url 'ssl_payment' 0 %}">
+      {% csrf_token %}
+      <input type="hidden" name="direct_payment" value="1">
+      <button type="submit" class="block w-full py-3 bg-zinc-900 text-white text-sm font-medium rounded-lg text-center hover:bg-zinc-800 transition-all hover:scale-105">
+        Pay Now
+      </button>
+    </form>
+
+    <!-- Accepted Payment Methods -->
+    <div class="mt-6 text-center">
+      <p class="text-xs text-zinc-500 mb-3">We accept</p>
+      <div class="flex justify-center space-x-2">
+        <img src="{% static 'images/payment/visa.png' %}" alt="Visa" class="w-10 h-7 object-contain">
+        <img src="{% static 'images/payment/mastercard.png' %}" alt="MasterCard" class="w-10 h-7 object-contain">
+        <img src="{% static 'images/payment/amex.png' %}" alt="AMEX" class="w-10 h-7 object-contain">
+        <img src="{% static 'images/payment/paypal.png' %}" alt="PayPal" class="w-10 h-7 object-contain">
+      </div>
+    </div>
+
+  </div>
+</div>

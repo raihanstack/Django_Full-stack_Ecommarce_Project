@@ -1,0 +1,56 @@
+<!-- FEATURED PRODUCTS -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Heading -->
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900 text-center mb-12">
+            Featured Products
+        </h2>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            {% for product in FeaturedProductsList %}
+            <div class="group relative overflow-hidden rounded-2xl bg-white/40 backdrop-blur-md border border-white/30 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 cursor-pointer">
+
+                <!-- Product Image -->
+                <div class="overflow-hidden rounded-t-2xl">
+                    <img
+                        src="{{ product.image.url if product.image else '/static/images/placeholder.png' }}"
+                        alt="{{ product.title }}"
+                        class="w-full h-56 sm:h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                </div>
+
+                <!-- Product Info -->
+                <div class="p-5 space-y-2">
+                    <h3 class="text-base font-medium text-zinc-900 line-clamp-1">{{ product.title }}</h3>
+
+                    <div class="flex items-center text-xs text-zinc-500 gap-2">
+                        <span class="text-amber-400">★ {{ product.star|default:"0" }}</span>
+                        <span>({{ product.review_count|default:"0" }})</span>
+                    </div>
+
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-xl font-semibold text-zinc-900">
+                            {% if product.discount_price %}
+                                ৳{{ product.discount_price }}
+                            {% else %}
+                                ৳{{ product.price }}
+                            {% endif %}
+                        </span>
+                        <a href="{% url 'add_to_cart' product.id %}" class="px-4 py-2 bg-zinc-900 text-white text-sm rounded-lg hover:bg-zinc-800 transition-colors">
+                            ADD
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            {% empty %}
+                <p class="text-center text-zinc-500 col-span-4">No featured products available.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,81 @@
+<!-- HERO BANNER (Clothing Style) -->
+<section class="relative overflow-hidden py-20 sm:py-28 bg-neutral-50">
+
+    <!-- Soft Background Glow -->
+    <div class="absolute -top-40 -left-40 w-[500px] h-[500px] bg-rose-200 rounded-full blur-3xl opacity-20"></div>
+    <div class="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-amber-200 rounded-full blur-3xl opacity-20"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+            <!-- LEFT CONTENT -->
+            <div class="space-y-8 animate-fadeUp">
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 leading-tight">
+                    Elevate Your <br>
+                    <span class="text-rose-500">Everyday Style</span>
+                </h1>
+
+                <p class="text-lg text-zinc-600 max-w-md">
+                    Discover timeless fashion pieces designed for confidence, comfort, and elegance.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="/product/"
+                       class="px-8 py-3 text-sm font-medium text-white bg-black rounded-full hover:bg-zinc-800 transition duration-300 hover:scale-105">
+                        Shop Collection
+                    </a>
+
+                    <a href="/product/"
+                       class="px-8 py-3 text-sm font-medium text-zinc-900 bg-white/60 backdrop-blur-md border border-zinc-300 rounded-full hover:border-black transition duration-300 hover:scale-105">
+                        New Arrivals
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- RIGHT IMAGE -->
+            <div class="flex justify-center lg:justify-end animate-fadeUp delay-200">
+
+                <div class="relative bg-white/40 backdrop-blur-xl rounded-3xl border border-white/40 shadow-xl p-4 sm:p-6 w-full max-w-md transition duration-500 hover:scale-105">
+
+                    <img
+                        src="https://placehold.co/500x600/f3f4f6/999999?text=Fashion+Model"
+                        alt="Fashion Model"
+                        class="w-full h-[420px] sm:h-[500px] object-cover rounded-2xl animate-float"
+                    />
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Animations -->
+<style>
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeUp {
+    animation: fadeUp 0.9s ease-out forwards;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+    animation: float 5s ease-in-out infinite;
+}
+</style>

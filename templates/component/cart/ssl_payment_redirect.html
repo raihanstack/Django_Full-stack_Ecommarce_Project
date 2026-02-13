@@ -1,0 +1,36 @@
+def ssl_payment(request, invoice_id):
+    user_id = 1  # Dummy admin user for now
+    cart_items = ProductCart.objects.filter(user_id=user_id)
+
+    if request.method == "POST":
+        # Generate invoice from cart
+        total = sum(float(item.price) * int(item.qty) for item in cart_items)
+        invoice = Invoice.objects.create(
+            total=total, vat=0, payable=total,
+            cus_details="Billing Info",
+            ship_details="Shipping Info",
+            tran_id="", val_id="",
+            delivery_status="pending",
+            payment_status="Pending",
+            user_id=user_id
+        )
+
+        for item in cart_items:
+            InvoiceProduct.objects.create(
+                invoice=invoice,
+                product=item.product,
+                user_id=user_id,
+                qty=item.qty,
+                sale_price=item.price
+            )
+
+        # Clear cart
+        cart_items.delete()
+
+        # Redirect to SSLCommerz payment page
+        ssl_account = SSLCommerzAccount.objects.first()
+        context = {
+            'invoice': invoice,
+            'ssl_account': ssl_account,
+        }
+        return render(request, 'ssl_payment_redirect.html', context)
